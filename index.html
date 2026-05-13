@@ -2,8 +2,8 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Fjellbjørn - Druido della Luna Lv.10 | Interattivo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>Fjellbjørn - Bestiario interattivo | Popup dettagli</title>
     <style>
         * {
             margin: 0;
@@ -14,121 +14,122 @@
         body {
             background: #1f2c1c;
             font-family: 'Segoe UI', 'Garamond', 'Georgia', serif;
-            padding: 2rem 1rem;
+            padding: 12px 8px;
             color: #f0ede8;
         }
 
         .sheet-container {
-            max-width: 1400px;
+            max-width: 100%;
             margin: 0 auto;
             background: #fcf8ef;
             background-image: radial-gradient(circle at 10% 20%, rgba(180, 150, 100, 0.1) 2%, transparent 2.5%);
             background-size: 28px 28px;
-            border-radius: 32px;
+            border-radius: 28px;
             box-shadow: 0 20px 35px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255,255,240,0.6);
             overflow: hidden;
             color: #2c2b26;
         }
 
+        /* HEADER MOBILE FRIENDLY */
         .header {
             background: #1f3b2c;
-            padding: 1.5rem 2rem;
+            padding: 1rem;
             border-bottom: 6px solid #dba551;
             color: #f9e7c2;
             display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: baseline;
+            flex-direction: column;
             gap: 0.8rem;
         }
-
         .title h1 {
-            font-size: 2.3rem;
-            letter-spacing: 2px;
-            font-weight: 700;
-            text-shadow: 2px 2px 0 #0a2a1c;
+            font-size: 1.7rem;
+            letter-spacing: 1px;
+            word-break: break-word;
         }
-
         .title p {
-            font-size: 0.9rem;
-            font-style: italic;
-            color: #e9d6a7;
+            font-size: 0.8rem;
         }
-
         .meta-tags {
             background: #2e4a38;
-            padding: 0.5rem 1.2rem;
-            border-radius: 60px;
-            font-weight: bold;
-            text-align: right;
+            padding: 0.4rem 0.8rem;
+            border-radius: 40px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.4rem;
         }
-
         .meta-tags span {
             background: #dba551;
             color: #1f2c1b;
-            padding: 0.2rem 0.7rem;
-            border-radius: 30px;
-            margin: 0 0.2rem;
-            font-size: 0.75rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            white-space: nowrap;
         }
 
+        /* GRID MOBILE: una colonna */
         .grid-2col {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.8rem;
-            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            padding: 1rem;
         }
-
-        @media (max-width: 860px) {
+        @media (min-width: 768px) {
             .grid-2col {
-                grid-template-columns: 1fr;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
                 gap: 1.5rem;
+                padding: 1.5rem;
+            }
+            .header {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: baseline;
+                padding: 1.2rem 1.8rem;
+            }
+            .title h1 {
+                font-size: 2rem;
             }
         }
 
         .card {
             background: #fffbf0;
-            border-radius: 28px;
-            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
+            border-radius: 24px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
             border: 1px solid #ecd9b0;
+            margin-bottom: 0;
         }
-
         .card-header {
             background: #eadbbe;
-            padding: 0.7rem 1.5rem;
+            padding: 0.6rem 1rem;
             font-weight: bold;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             border-bottom: 2px solid #c7a86b;
             color: #2c472e;
             display: flex;
             align-items: center;
-            gap: 0.6rem;
-        }
-
-        .card-content {
-            padding: 1rem 1.5rem;
-        }
-
-        .stat-row {
-            display: flex;
+            gap: 0.5rem;
             flex-wrap: wrap;
-            justify-content: space-between;
-            margin-bottom: 0.7rem;
-            border-bottom: 1px dashed #e0cfb0;
-            padding-bottom: 0.4rem;
+        }
+        .card-content {
+            padding: 0.9rem;
         }
 
+        /* Ability scores */
         .ability-scores {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 0.8rem;
             background: #f5efdf;
             border-radius: 24px;
-            padding: 1rem;
+            padding: 0.8rem;
             margin-bottom: 1rem;
         }
-
+        @media (min-width: 480px) {
+            .ability-scores {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
         .ability {
             text-align: center;
             background: white;
@@ -136,15 +137,12 @@
             padding: 0.4rem;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
-
         .ability .abbr {
             font-weight: bold;
-            font-size: 0.8rem;
-            text-transform: uppercase;
+            font-size: 0.75rem;
         }
-
         .ability .score {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             font-weight: 800;
             line-height: 1;
         }
@@ -153,210 +151,296 @@
             background: #e1cfaa;
             padding: 0.6rem;
             border-radius: 20px;
-            margin: 1rem 0;
+            margin: 0.8rem 0;
             text-align: center;
         }
-
         .hp-number {
             font-size: 2rem;
             font-weight: 800;
-            font-family: monospace;
-            display: inline-block;
-            width: auto;
-            min-width: 80px;
             background: white;
-            border-radius: 20px;
-            padding: 0.2rem 0.8rem;
+            display: inline-block;
+            padding: 0.1rem 0.8rem;
+            border-radius: 50px;
+            min-width: 90px;
         }
-
         .hp-controls {
             display: flex;
             justify-content: center;
-            gap: 0.8rem;
+            gap: 0.5rem;
             margin-top: 0.5rem;
-            align-items: center;
+            flex-wrap: wrap;
         }
-
         .hp-controls input {
             width: 80px;
-            text-align: center;
-            font-size: 1.2rem;
-            font-family: monospace;
-            border-radius: 30px;
+            font-size: 1rem;
+            padding: 0.4rem;
+            border-radius: 40px;
             border: 1px solid #b4782e;
-            padding: 0.2rem;
+            text-align: center;
         }
-
         .btn-icon {
             background: #3f6b47;
             border: none;
             color: white;
             font-weight: bold;
             font-size: 1.2rem;
-            width: 32px;
-            height: 32px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             cursor: pointer;
             transition: 0.1s;
         }
-
-        .btn-icon:hover {
-            background: #dba551;
-        }
-
-        .badge {
-            background: #597a4b;
+        .reset-btn {
+            background: #b4782e;
+            border: none;
             color: white;
             border-radius: 30px;
-            padding: 0.2rem 0.7rem;
+            padding: 0.3rem 0.8rem;
             font-size: 0.7rem;
-        }
-
-        .attack-list {
-            list-style: none;
+            cursor: pointer;
         }
 
         .attack-list li {
             background: #f6efdf;
             margin: 0.5rem 0;
-            padding: 0.5rem 0.8rem;
-            border-radius: 40px;
+            padding: 0.5rem 0.7rem;
+            border-radius: 30px;
             display: flex;
             justify-content: space-between;
-            font-weight: 500;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            font-size: 0.85rem;
         }
 
+        /* Spell grid */
         .spell-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            grid-template-columns: 1fr;
             gap: 0.8rem;
+        }
+        @media (min-width: 550px) {
+            .spell-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
         .spell-level {
             background: #f2e5cf;
-            border-radius: 18px;
+            border-radius: 20px;
             padding: 0.6rem;
         }
-        .spell-level h4 {
-            border-left: 4px solid #3f6b47;
-            padding-left: 0.6rem;
-            margin-bottom: 0.5rem;
-        }
-        .spell-list {
-            font-size: 0.85rem;
-            list-style: none;
-        }
-        .spell-list li {
-            margin: 0.2rem 0;
-        }
-
         .slot-tracker {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.3rem;
-            margin-top: 0.4rem;
+            gap: 0.4rem;
+            margin-top: 0.5rem;
         }
         .slot-check {
             display: inline-flex;
             align-items: center;
             gap: 0.2rem;
             background: #e6d8be;
-            padding: 0.1rem 0.4rem;
-            border-radius: 20px;
+            padding: 0.1rem 0.5rem;
+            border-radius: 30px;
             font-size: 0.7rem;
         }
         .slot-check input {
-            width: 16px;
-            height: 16px;
+            width: 18px;
+            height: 18px;
             cursor: pointer;
         }
 
+        /* Bestiario griglia */
         .beast-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
-            gap: 1rem;
+            grid-template-columns: 1fr;
+            gap: 0.8rem;
             margin-top: 1rem;
+        }
+        @media (min-width: 600px) {
+            .beast-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (min-width: 1000px) {
+            .beast-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
         }
         .beast-card {
             background: #f4ecdb;
             border-radius: 20px;
-            padding: 0.8rem;
-            border-left: 6px solid #b4782e;
+            padding: 0.7rem;
+            border-left: 5px solid #b4782e;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: transform 0.05s linear, background 0.1s;
+            touch-action: manipulation;
+        }
+        .beast-card:active {
+            background: #e9ddc4;
+            transform: scale(0.98);
         }
         .beast-name {
             font-weight: bold;
-            font-size: 1.1rem;
-            display: flex;
-            justify-content: space-between;
-            border-bottom: 1px solid #cbad7a;
-            margin-bottom: 0.4rem;
-        }
-        .beast-stats {
-            font-size: 0.8rem;
+            font-size: 1rem;
             display: flex;
             flex-wrap: wrap;
-            gap: 0.5rem;
-            margin: 0.4rem 0;
+            justify-content: space-between;
+        }
+        .beast-stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin: 0.3rem 0;
         }
         .beast-stats span {
             background: #e2d2b0;
             padding: 0.1rem 0.5rem;
             border-radius: 20px;
-        }
-        .note {
-            background: #f2e5cf;
-            border-radius: 20px;
-            padding: 0.8rem;
-            margin-top: 1rem;
-            font-size: 0.85rem;
-            border-left: 4px solid #dba551;
+            font-size: 0.7rem;
         }
 
+        /* Modale popup */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.85);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(3px);
+        }
+        .modal-content {
+            background: #fffaf0;
+            max-width: 90%;
+            width: 500px;
+            max-height: 85%;
+            border-radius: 32px;
+            overflow-y: auto;
+            box-shadow: 0 20px 35px rgba(0,0,0,0.4);
+            border: 2px solid #dba551;
+            position: relative;
+            animation: fadeInUp 0.2s ease;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .modal-header {
+            background: #1f3b2c;
+            color: #f9e7c2;
+            padding: 1rem;
+            font-size: 1.4rem;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 28px 28px 0 0;
+        }
+        .modal-header button {
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: #f9e7c2;
+            line-height: 1;
+        }
+        .modal-body {
+            padding: 1.2rem;
+            color: #2c2b26;
+        }
+        .modal-body h3 {
+            color: #b4782e;
+            margin-top: 0.6rem;
+            margin-bottom: 0.3rem;
+            font-size: 1.1rem;
+        }
+        .modal-body p {
+            margin-bottom: 0.5rem;
+            line-height: 1.4;
+            font-size: 0.9rem;
+        }
+        .damage-detail {
+            background: #f2e5cf;
+            border-radius: 18px;
+            padding: 0.5rem;
+            margin: 0.5rem 0;
+            font-family: monospace;
+            font-size: 0.85rem;
+        }
+        .close-modal {
+            background: #b4782e;
+            border: none;
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 30px;
+            margin-top: 0.8rem;
+            cursor: pointer;
+        }
+
+        /* Inventario */
+        .coin-purse div {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            align-items: center;
+        }
+        .coin-purse input {
+            width: 80px;
+            padding: 0.3rem;
+            border-radius: 30px;
+            border: 1px solid #c7a86b;
+            text-align: center;
+        }
         .inventory-item {
             display: flex;
             justify-content: space-between;
             background: #fff3e0;
-            margin: 0.3rem 0;
-            padding: 0.3rem 0.6rem;
-            border-radius: 30px;
+            margin: 0.4rem 0;
+            padding: 0.4rem 0.6rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.4rem;
         }
         .add-item {
             display: flex;
+            flex-direction: column;
             gap: 0.5rem;
-            margin-top: 0.5rem;
+            margin-top: 0.7rem;
         }
-        .coin-purse {
-            background: #e8ddc0;
-            border-radius: 20px;
+        .add-item input {
+            width: 100%;
             padding: 0.5rem;
-            margin-bottom: 1rem;
+            border-radius: 40px;
+            border: 1px solid #c7a86b;
         }
-        .coin-purse div {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            align-items: center;
-        }
-
-        .reset-btn {
-            background: #b4782e;
-            border: none;
+        .add-item button {
+            width: 100%;
+            border-radius: 40px;
+            background: #3f6b47;
             color: white;
-            border-radius: 30px;
-            padding: 0.2rem 0.7rem;
-            font-size: 0.7rem;
-            cursor: pointer;
+            border: none;
+            padding: 0.5rem;
+            font-weight: bold;
         }
-
+        .note {
+            background: #f2e5cf;
+            border-radius: 20px;
+            padding: 0.7rem;
+            font-size: 0.8rem;
+        }
         footer {
             background: #e1cfaa;
             text-align: center;
             padding: 0.8rem;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: #4f3e2c;
-        }
-        hr {
-            margin: 0.8rem 0;
-            border-color: #e2cfaa;
         }
     </style>
 </head>
@@ -364,46 +448,43 @@
 <div class="sheet-container">
     <div class="header">
         <div class="title">
-            <h1>🐉 Fjellbjørn, Il Soffio Primordiale</h1>
-            <p>Druido del Circolo della Luna · Custode dei ghiacci e del fuoco ancestrale</p>
+            <h1>🐉 Fjellbjørn</h1>
+            <p>Druido della Luna · Soffio Primordiale</p>
         </div>
         <div class="meta-tags">
-            <span>Livello 10</span><span>Draconide</span><span>Forme elementali</span><span>CR max 3 / Elementali</span>
+            <span>Livello 10</span><span>Draconide</span><span>Elementali</span><span>CR3/5</span>
         </div>
     </div>
 
     <div class="grid-2col">
-        <!-- COLONNA SX: caratteristiche, combat, HP interattivo -->
+        <!-- COLONNA SX -->
         <div>
             <div class="card">
-                <div class="card-header">🧬 Caratteristiche & Salvezze</div>
+                <div class="card-header">🧬 Caratteristiche</div>
                 <div class="card-content">
                     <div class="ability-scores">
-                        <div class="ability"><div class="abbr">Forza</div><div class="score">20</div><div class="badge">+5</div> TS+5</div>
-                        <div class="ability"><div class="abbr">Destrezza</div><div class="score">17</div><div class="badge">+3</div> TS+3</div>
-                        <div class="ability"><div class="abbr">Costituzione</div><div class="score">18</div><div class="badge">+4</div> TS+4</div>
-                        <div class="ability"><div class="abbr">Intelligenza</div><div class="score">20</div><div class="badge">+5</div> TS+9</div>
-                        <div class="ability"><div class="abbr">Saggezza</div><div class="score">18</div><div class="badge">+4</div> TS+8</div>
-                        <div class="ability"><div class="abbr">Carisma</div><div class="score">19</div><div class="badge">+4</div> TS+4</div>
+                        <div class="ability"><div class="abbr">Forza</div><div class="score">20</div> +5 TS+5</div>
+                        <div class="ability"><div class="abbr">Destrezza</div><div class="score">17</div> +3 TS+3</div>
+                        <div class="ability"><div class="abbr">Costituzione</div><div class="score">18</div> +4 TS+4</div>
+                        <div class="ability"><div class="abbr">Intelligenza</div><div class="score">20</div> +5 TS+9</div>
+                        <div class="ability"><div class="abbr">Saggezza</div><div class="score">18</div> +4 TS+8</div>
+                        <div class="ability"><div class="abbr">Carisma</div><div class="score">19</div> +4 TS+4</div>
                     </div>
-                    <div class="stat-row"><span>🛡️ Classe Armatura (CA)</span><span><strong>16</strong> (cuoio + destrezza)</span></div>
-                    <div class="stat-row"><span>⚡ Iniziativa</span><span>+3</span></div>
-                    <div class="stat-row"><span>👣 Velocità</span><span>9 m (30 ft)</span></div>
-                    <div class="stat-row"><span>🏆 Bonus Competenza</span><span>+4</span></div>
-                    
-                    <!-- HP interattivo -->
+                    <div style="display:flex; justify-content:space-between;"><span>🛡️ CA</span><span><strong>16</strong></span></div>
+                    <div style="display:flex; justify-content:space-between; margin-top:0.3rem;"><span>⚡ Iniziativa</span><span>+3</span></div>
+                    <div style="display:flex; justify-content:space-between;"><span>👣 Velocità</span><span>9 m (30 ft)</span></div>
                     <div class="hp-block">
                         <div>❤️ Punti Ferita</div>
                         <div class="hp-number" id="currentHpDisplay">93</div>
                         <div class="hp-controls">
-                            <button class="btn-icon" id="hpSub">-</button>
-                            <input type="number" id="hpInput" value="93" step="1" style="width:80px; text-align:center;">
+                            <button class="btn-icon" id="hpSub">−</button>
+                            <input type="number" id="hpInput" value="93" step="1">
                             <button class="btn-icon" id="hpAdd">+</button>
                         </div>
-                        <div style="font-size:0.7rem">Max PF: 93 · modifica in tempo reale (danni/ cure)</div>
+                        <div style="font-size:0.7rem">Max PF: 93 · modificabile</div>
                     </div>
-                    <div class="stat-row"><span>✨ CD Tiro salvezza incantesimi</span><span><strong>16</strong></span></div>
-                    <div class="stat-row"><span>🎯 Bonus attacco incantesimi</span><span>+8</span></div>
+                    <div style="display:flex; justify-content:space-between;"><span>✨ CD Incantesimi</span><span><strong>16</strong></span></div>
+                    <div style="display:flex; justify-content:space-between;"><span>🎯 Attacco incant.</span><span>+8</span></div>
                 </div>
             </div>
 
@@ -411,248 +492,309 @@
                 <div class="card-header">⚔️ Attacchi & Talenti</div>
                 <div class="card-content">
                     <ul class="attack-list">
-                        <li><span>🐲 Sputare Fuoco (razziale)</span><span>CD 16 Destrezza · cono 15 ft · 3d6 fuoco</span></li>
-                        <li><span>❄️ Coltello di Ghiaccio (Ice Knife)</span><span>+8 · 1d10 + 6d6 freddo · area 5 ft</span></li>
-                        <li><span>🌀 Colpo Selvaggio (Uncaged Strike)</span><span>+9 · 6d6 + 5d8</span></li>
-                        <li><span>🔥 Lama Infuocata (spada accetta)</span><span>+8 · 1d6/1d8 + 1d4 fuoco</span></li>
+                        <li><span>🐲 Sputare Fuoco</span><span>CD16 Dex · cono 15ft · 3d6 fuoco</span></li>
+                        <li><span>❄️ Coltello di Ghiaccio</span><span>+8 · 1d10+6d6 freddo</span></li>
+                        <li><span>🌀 Colpo Selvaggio</span><span>+9 · 6d6+5d8</span></li>
+                        <li><span>🔥 Lama Infuocata</span><span>+8 · 1d6/1d8+1d4 fuoco</span></li>
                     </ul>
-                    <div class="note" style="margin-top:0.6rem">🔥 Resistenza al fuoco · Recupero slot in trasformazione · Attacchi in forma selvatica magici (liv.6+).</div>
+                    <div class="note">🔥 Resistenza fuoco · Recupero slot in trasformazione · Attacchi magici in forma selvatica.</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🐾 Forma Selvatica (2 usi / breve)</div>
+                <div class="card-content">
+                    <div class="slot-tracker" id="wildShapeTracker" style="justify-content: center;"></div>
+                    <div class="note" style="margin-top:0.5rem">⚠️ Elementale/Drago minore richiedono <strong>2 usi</strong>.<br>
+                    <button id="resetWildShape" class="reset-btn" style="margin-top:0.3rem;">⟳ Ripristina utilizzi</button></div>
                 </div>
             </div>
         </div>
 
-        <!-- COLONNA DX: incantesimi con tracker slot -->
+        <!-- COLONNA DX: incantesimi -->
         <div>
             <div class="card">
-                <div class="card-header">📜 Grimorio del Ghiacciaio (Incantesimi preparati)</div>
+                <div class="card-header">📜 Grimorio</div>
                 <div class="card-content">
                     <div class="spell-grid">
                         <div class="spell-level"><h4>🎯 Trucchetti</h4><ul class="spell-list"><li>Controllo Fiamme</li><li>Guida</li><li>Dare Forma all'Acqua</li><li>Mending</li></ul></div>
-                        <div class="spell-level"><h4>1° livello (4 slot)</h4><ul class="spell-list"><li>Parola Guaritrice</li><li>Coltello di Ghiaccio ❄️</li><li>Parlare con gli Animali</li><li>Luminescenza</li></ul>
-                        <div class="slot-tracker" id="slots1"></div></div>
-                        <div class="spell-level"><h4>2° livello (3 slot)</h4><ul class="spell-list"><li>Riscaldare il Metallo</li><li>Ragnatela (Web) *</li><li>Spike Growth</li><li>Spider Climb *</li></ul>
-                        <div class="slot-tracker" id="slots2"></div></div>
-                        <div class="spell-level"><h4>3° livello (3 slot)</h4><ul class="spell-list"><li>Invocare il Fulmine</li><li>Dissolvi Magie</li><li>Evoca Animali</li><li>Gaseous Form *</li><li>Stinking Cloud *</li></ul>
-                        <div class="slot-tracker" id="slots3"></div></div>
-                        <div class="spell-level"><h4>4° livello (3 slot)</h4><ul class="spell-list"><li>Metamorfosi</li><li>Muro di Fuoco</li><li>Greater Invisibility *</li><li>Stone Shape *</li></ul>
-                        <div class="slot-tracker" id="slots4"></div></div>
-                        <div class="spell-level"><h4>5° livello (2 slot)</h4><ul class="spell-list"><li>Comunione con la Natura</li><li>Muro di Pietra</li><li>Ristoro Superiore</li></ul>
-                        <div class="slot-tracker" id="slots5"></div></div>
+                        <div class="spell-level"><h4>1° livello (4 slot)</h4><ul class="spell-list"><li>Parola Guaritrice</li><li>Coltello di Ghiaccio</li><li>Parlare con Animali</li><li>Luminescenza</li></ul><div class="slot-tracker" id="slots1"></div></div>
+                        <div class="spell-level"><h4>2° livello (3 slot)</h4><ul class="spell-list"><li>Riscaldare Metallo</li><li>Ragnatela *</li><li>Spike Growth</li><li>Spider Climb *</li></ul><div class="slot-tracker" id="slots2"></div></div>
+                        <div class="spell-level"><h4>3° livello (3 slot)</h4><ul class="spell-list"><li>Invocare Fulmine</li><li>Dissolvi Magie</li><li>Evoca Animali</li><li>Gaseous Form *</li><li>Stinking Cloud *</li></ul><div class="slot-tracker" id="slots3"></div></div>
+                        <div class="spell-level"><h4>4° livello (3 slot)</h4><ul class="spell-list"><li>Metamorfosi</li><li>Muro di Fuoco</li><li>Invisibilità Sup. *</li><li>Plasmare Pietra *</li></ul><div class="slot-tracker" id="slots4"></div></div>
+                        <div class="spell-level"><h4>5° livello (2 slot)</h4><ul class="spell-list"><li>Comunione Natura</li><li>Muro di Pietra</li><li>Ristoro Superiore</li></ul><div class="slot-tracker" id="slots5"></div></div>
                     </div>
-                    <div class="note"><span class="inline-code">* Sempre preparati</span> · <button class="reset-btn" id="resetSpells">Ripristina tutti gli slot</button></div>
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-top:0.5rem;"><span class="inline-code">* sempre preparati</span><button id="resetSpells" class="reset-btn">Ripristina slot</button></div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- RIGA EXTRA: INVENTARIO e TRACCIAMENTO FORME SELVATICHE -->
-    <div style="padding: 0 2rem 1.5rem 2rem; display: flex; flex-direction: column; gap: 1.5rem;">
-        <!-- CARD INVENTARIO MODIFICABILE -->
+    <!-- INVENTARIO -->
+    <div style="padding: 0 1rem 0.5rem 1rem;">
         <div class="card">
-            <div class="card-header">🎒 Zaino & Rifornimenti (modificabile in tempo reale)</div>
+            <div class="card-header">🎒 Zaino & Monete</div>
             <div class="card-content">
                 <div class="coin-purse">
                     <div><strong>💰 Monete</strong></div>
                     <div>
-                        <label>🔸 PO (oro): <input type="number" id="goldCoins" value="125" step="1" style="width:80px;"></label>
-                        <label>🔹 PA (argento): <input type="number" id="silverCoins" value="45" step="1" style="width:80px;"></label>
-                        <label>🔸 PE (rame): <input type="number" id="copperCoins" value="80" step="1" style="width:80px;"></label>
+                        <label>🟡 PO: <input type="number" id="goldCoins" value="125" step="1"></label>
+                        <label>⚪ PA: <input type="number" id="silverCoins" value="45" step="1"></label>
+                        <label>🟤 PE: <input type="number" id="copperCoins" value="80" step="1"></label>
                     </div>
                 </div>
-                <div><strong>📦 Oggetti nello zaino:</strong></div>
+                <div><strong>📦 Oggetti:</strong></div>
                 <div id="inventoryList">
-                    <div class="inventory-item">🧪 Pozione di guarigione (2d4+2) <button class="remove-item-btn reset-btn" style="background:#8b5a2b;">🗑️</button></div>
-                    <div class="inventory-item">🔦 Torcia + acciarino <button class="remove-item-btn reset-btn" style="background:#8b5a2b;">🗑️</button></div>
-                    <div class="inventory-item">📜 Pergamena di Identificazione <button class="remove-item-btn reset-btn" style="background:#8b5a2b;">🗑️</button></div>
-                    <div class="inventory-item">🍞 5 razioni da viaggio <button class="remove-item-btn reset-btn" style="background:#8b5a2b;">🗑️</button></div>
+                    <div class="inventory-item">🧪 Pozione di guarigione <button class="remove-item-btn reset-btn">🗑️</button></div>
+                    <div class="inventory-item">🔦 Torcia + acciarino <button class="remove-item-btn reset-btn">🗑️</button></div>
+                    <div class="inventory-item">📜 Pergamena Identificazione <button class="remove-item-btn reset-btn">🗑️</button></div>
+                    <div class="inventory-item">🍞 5 razioni <button class="remove-item-btn reset-btn">🗑️</button></div>
                 </div>
                 <div class="add-item">
-                    <input type="text" id="newItemName" placeholder="Nuovo oggetto (es. Spada corta, Amuleto)" style="flex:1; border-radius:30px; border:1px solid #c7a86b; padding:0.3rem 0.8rem;">
-                    <button id="addItemBtn" class="btn-icon" style="border-radius:30px; width:auto; padding:0 1rem;">+ Aggiungi</button>
+                    <input type="text" id="newItemName" placeholder="Nuovo oggetto (es. Amuleto)">
+                    <button id="addItemBtn">+ Aggiungi oggetto</button>
                 </div>
-                <div class="note" style="margin-top:0.6rem">💡 I valori di monete e oggetti si modificano direttamente. Per rimuovere oggetti clicca sul cestino.</div>
             </div>
         </div>
+    </div>
 
-        <!-- CARD TRACCIAMENTO FORME SELVATICHE -->
+    <!-- BESTIARIO CON POPUP -->
+    <div style="padding: 0 1rem 1rem 1rem;">
         <div class="card">
-            <div class="card-header">🐾 Forma Selvatica – Utilizzi (2 per riposo breve)</div>
+            <div class="card-header">📖 Bestiario – Forme Selvatiche (clicca per dettagli)</div>
             <div class="card-content">
-                <div><strong>🌙 Trasformazioni disponibili:</strong></div>
-                <div class="slot-tracker" style="margin: 0.5rem 0;" id="wildShapeTracker"></div>
-                <div class="note" style="margin-top:0.4rem">
-                    ⚠️ Ogni trasformazione in <strong>Elementale</strong> richiede <strong>2 utilizzi</strong> della Forma Selvatica. Spunta i checkbox quando usi una carica.<br>
-                    <button id="resetWildShape" class="reset-btn">Ripristina tutti gli utilizzi</button>
+                <div class="beast-grid" id="beastGrid">
+                    <!-- Le card verranno generate via JS per gestire i dati dei popup -->
                 </div>
+                <div class="note">✨ Tocca / clicca su una bestia per aprire la scheda completa: lore, tattiche e danni dettagliati.</div>
             </div>
         </div>
     </div>
 
-    <!-- SEZIONE BESTIARIO PERSONALE (solo forme) -->
-    <div style="padding: 0 2rem 1.5rem 2rem;">
-        <div class="card">
-            <div class="card-header">📖 Bestiario personale – Forme Selvatiche potenziate</div>
-            <div class="card-content">
-                <p><strong>Cerchio della Luna livello 10:</strong> bestie CR ≤ 3 e Elementali (CR5, costo 2 usi). Attacchi magici.</p>
-                <div class="beast-grid">
-                    <div class="beast-card"><div class="beast-name">🐻 Orso Bruno <span>CR 1</span></div><div class="beast-stats"><span>CA 11</span><span>PF 34</span><span>Vel 40 ft</span></div><div>Artigli +5 (2d6+4), morso +5 (1d10+4). Udito/olfatto acuti.</div></div>
-                    <div class="beast-card"><div class="beast-name">🐺 Lupo <span>CR ¼</span></div><div class="beast-stats"><span>CA 13</span><span>PF 11</span><span>Vel 40 ft</span></div><div>Morso +4 (2d4+2), abbattuta. Tattiche branco.</div></div>
-                    <div class="beast-card"><div class="beast-name">🦅 Aquila Gigante <span>CR 1</span></div><div class="beast-stats"><span>CA 13</span><span>PF 26</span><span>Volo 80 ft</span></div><div>Becco +5 (1d6+3), artigli +5 (2d6+3). Immersione.</div></div>
-                    <div class="beast-card"><div class="beast-name">🐗 Cinghiale Gigante <span>CR 2</span></div><div class="beast-stats"><span>CA 12</span><span>PF 42</span><span>Vel 40 ft</span></div><div>Zanne +5 (2d6+3), carica +4d6, Tenacia Brutale.</div></div>
-                    <div class="beast-card"><div class="beast-name">🐺 Lupo Invernale <span>CR 3</span></div><div class="beast-stats"><span>CA 13</span><span>PF 75</span><span>Vel 50 ft</span></div><div>Morso +6 (2d6+4), Soffio Gelido cono 15ft (4d8 freddo CD12).</div></div>
-                    <div class="beast-card"><div class="beast-name">❄️ Tigre dei Ghiacci <span>CR 2</span></div><div class="beast-stats"><span>CA 13</span><span>PF 45</span><span>Vel 50 ft</span></div><div>Artigli +5 (2d6+3), morso +5 (1d8+3+2d6 freddo). Immunità freddo.</div></div>
-                    <div class="beast-card"><div class="beast-name">🐍 Anfisbaena <span>CR 2</span></div><div class="beast-stats"><span>CA 14</span><span>PF 39</span><span>Vel 30 ft, volo 30 ft</span></div><div>Due morsi +4 (1d6+2 + veleno 3d6). Avvolgere, due teste.</div></div>
-                    <div class="beast-card"><div class="beast-name">🦂 Scorpione Gigante <span>CR 3</span></div><div class="beast-stats"><span>CA 15</span><span>PF 52</span><span>Vel 40 ft</span></div><div>Artiglio +4 (1d8+2), pungiglione +4 (1d10+2 +4d8 veleno).</div></div>
-                    <div class="beast-card"><div class="beast-name">🦕 Ankylosauro <span>CR 3</span></div><div class="beast-stats"><span>CA 15</span><span>PF 68</span><span>Vel 30 ft</span></div><div>Coda +7 (4d6+4), stordimento CD14.</div></div>
-                    <div class="beast-card"><div class="beast-name">🔥 Elementale del Fuoco <span>CR 5</span></div><div class="beast-stats"><span>CA 13</span><span>PF 102</span><span>Vel 50 ft</span></div><div>Contatto +8 (2d8 fuoco), brucia a contatto.</div></div>
-                    <div class="beast-card"><div class="beast-name">💧 Elementale dell'Acqua <span>CR 5</span></div><div class="beast-stats"><span>CA 14</span><span>PF 114</span><span>Nuoto 90 ft</span></div><div>Massetello +7 (2d8+5), Crogiolo.</div></div>
-                    <div class="beast-card"><div class="beast-name">⛰️ Elementale della Terra <span>CR 5</span></div><div class="beast-stats"><span>CA 17</span><span>PF 126</span><span>Scavare 30 ft</span></div><div>Schianto +8 (2d8+5), Terra che inghiotte.</div></div>
-                    <div class="beast-card"><div class="beast-name">🌬️ Elementale dell'Aria <span>CR 5</span></div><div class="beast-stats"><span>CA 15</span><span>PF 90</span><span>Volo 90 ft</span></div><div>Turbina +8 (2d8+5), risucchio.</div></div>
-                    <div class="beast-card"><div class="beast-name">🐉 Drago Elementale Minore <span>CR 4</span></div><div class="beast-stats"><span>CA 16</span><span>PF 75</span><span>Volo 60 ft</span></div><div>Morso +7 (1d10+4), Soffio elementale (4d6, CD14).</div></div>
-                </div>
-                <div class="note">💡 <strong>Trasformazioni:</strong> Elementali e Drago elementale richiedono 2 usi di Forma Selvatica. Tutte le statistiche sono già pronte per il gioco.</div>
+    <!-- MODALE POPUP -->
+    <div id="beastModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span id="modalBeastName">Bestia</span>
+                <button id="closeModalBtn">&times;</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- contenuto dinamico -->
             </div>
         </div>
     </div>
 
-    <!-- sezione incantesimi spiegazioni -->
-    <div style="padding: 0 2rem 2rem 2rem;">
-        <div class="card">
-            <div class="card-header">📖 Spiegazione rapida degli incantesimi</div>
-            <div class="card-content spell-explanation" style="font-size:0.85rem;">
-                <p><strong>Controllo Fiamme</strong>: manipolazione fuoco, <strong>Guida</strong>: +1d4 abilità, <strong>Dare Forma all'Acqua</strong>, <strong>Mending</strong>.<br>
-                <strong>1°</strong> Parola Guaritrice (cura a distanza), Coltello di Ghiaccio (danno+esplosione freddo), Parlare animali, Luminescenza (vantaggio attacchi). <br>
-                <strong>2°</strong> Riscaldare Metallo (2d8 fuoco), Ragnatela (controllo), Spike Growth (terreno spinoso), Spider Climb (arrampicata).<br>
-                <strong>3°</strong> Invocare Fulmine (4d10 ogni round), Dissolvi Magie, Evoca Animali, Gaseous Form (nuvola), Stinking Cloud (nausea).<br>
-                <strong>4°</strong> Metamorfosi (polymorph bestia), Muro di Fuoco, Invisibilità Superiore, Plasmare Pietra.<br>
-                <strong>5°</strong> Comunione natura, Muro di Pietra, Ristoro Superiore (100 cure + rimozioni).</p>
-            </div>
-        </div>
-    </div>
-
-    <footer>
-        🔥❄️ Fjellbjørn – PF modificabili, slot incantesimi checkabili, zaino interattivo e forme selvatiche tracciabili. Buon gioco!
-    </footer>
+    <footer>PF modificabili, slot incantesimi tracciabili, inventario dinamico. Clicca sulle bestie per la scheda completa!</footer>
 </div>
 
 <script>
-    // --- HP INTERATTIVO ---
+    // ---------- DATI BESTIE (Lore, tattiche, danni dettagliati) ----------
+    const beastDetails = {
+        "Orso Bruno": {
+            lore: "Imponente bestia delle foreste settentrionali, simbolo di forza bruta e resistenza. Fjellbjørn ne ammira la ferocia silenziosa e la capacità di cacciare anche nelle tempeste.",
+            tactics: "L'orso carica e colpisce con artigli e morso. In combattimento usa multiattacco per abbattere rapidamente i nemici. Ottimo come tank grazie ai PF elevati.",
+            attacks: "🗡️ Artigli: +5 al colpo, 2d6+4 taglienti. 🦷 Morso: +5 al colpo, 1d10+4 perforanti. Multiattacco: entrambi."
+        },
+        "Lupo": {
+            lore: "Cacciatore in branco, intelligente e leale. Spirito guida dei boschi, sfrutta la cooperazione per sopraffare prede più grandi.",
+            tactics: "Attacca in gruppo. Se un alleato è adiacente al bersaglio, il lupo ha vantaggio. Morso può far cadere prono.",
+            attacks: "🐺 Morso: +4 al colpo, 2d4+2 perforanti. TS Forza CD11 o prono."
+        },
+        "Aquila Gigante": {
+            lore: "Maestosa guardiana dei cieli, fedele agli dei del vento. Simboleggia la libertà e la vista acuta. Fjellbjørn la evoca per ricognizione aerea.",
+            tactics: "Immersioni fulminee dall'alto, colpisce con artigli per abbattere il nemico. Poi rifugge in volo.",
+            attacks: "🦅 Becco: +5 (1d6+3 perforanti). Artigli: +5 (2d6+3 taglienti). Immersione: se si muove 30ft verso bersaglio, FOR CD13 o prono."
+        },
+        "Cinghiale Gigante": {
+            lore: "Animale testardo e distruttivo, ricoperto di setole dure come acciaio. Incarna la tenacia primordiale.",
+            tactics: "Carica impetuosa, poi azzanna con le zanne. Se ridotto a 0 PF, può resistere con Tenacia Brutale.",
+            attacks: "🐗 Zanne: +5 (2d6+3 taglienti). Carica: +4d6 extra e abbattuta. Tenacia: TS Cos per rimanere a 1 PF."
+        },
+        "Lupo Invernale": {
+            lore: "Creatura leggendaria dei ghiacci eterni, il suo alito è una tempesta glaciale. Fjellbjørn l'ha domato nelle terre dei giganti di brina.",
+            tactics: "Usa il soffio gelido per colpire aree, poi morde i nemici proni. Immunità al freddo e movimento agile sulla neve.",
+            attacks: "❄️ Morso: +6 (2d6+4 perforanti). Soffio Gelido (ricarica 5-6): cono 15ft, TS Des CD12, 4d8 freddo (metà se successo)."
+        },
+        "Tigre dei Ghiacci": {
+            lore: "Variante artica della tigre, le sue zanne lasciano cristalli di brina. Fjellbjørn l'ha plasmata dalla magia dei ghiacciai.",
+            tactics: "Balzo e artigli per atterrare la preda, poi morso gelido. Ottima per attacchi rapidi e mobilità.",
+            attacks: "🐅 Artigli: +5 (2d6+3 taglienti). Morso: +5 (1d8+3 perforanti + 2d6 freddo). Balzo predatorio: abbatte (FOR13)."
+        },
+        "Anfisbaena": {
+            lore: "Serpente a due teste dal sangue draconico, velenoso e astuto. Custode di antichi segreti sotterranei.",
+            tactics: "Attacca con entrambe le teste, avvelena il bersaglio. Se colpisce due volte, avvolge e blocca il nemico.",
+            attacks: "🐍 Due morsi: +4 (1d6+2 perforanti + veleno 3d6, CD12 Cos dimezza). Avvolgere: se entrambi i morsi colpiscono, bersaglio afferrato e avvelenato."
+        },
+        "Scorpione Gigante": {
+            lore: "Aracnide delle caverne basaltiche, il suo pungiglione paralizza. Fjellbjørn lo usa per controllare il campo e colpire i fianchi.",
+            tactics: "Afferra con gli artigli, poi punge con la coda. Percezione cieca utile in oscurità.",
+            attacks: "🦂 Artiglio: +4 (1d8+2, afferra CD12). Pungiglione: +4 (1d10+2 + 4d8 veleno, CD12 Cos dimezza)."
+        },
+        "Ankylosauro": {
+            lore: "Dinosauro corazzato, vero carro armato della preistoria. Il suo martello osseo può stordire giganti.",
+            tactics: "Usa la coda pesante per difesa e controllo. Stordisce i nemici dando vantaggio agli alleati.",
+            attacks: "🦕 Coda: +7 (4d6+4 contundenti). TS Forza CD14 o stordito fino a inizio turno successivo."
+        },
+        "Elementale del Fuoco": {
+            lore: "Fiamma vivente, cuore dei vulcani. La sua furia purifica e brucia. Fjellbjørn lo convoca in battaglie decisive.",
+            tactics: "Illumina l'area, brucia i nemici a contatto. Multiattacco con contatto infuocato. Immune a fuoco, veleno.",
+            attacks: "🔥 Contatto: +8 (2d8 fuoco). Forma liquida infuocata: chi lo colpisce in mischia subisce 1d10 fuoco."
+        },
+        "Elementale dell'Acqua": {
+            lore: "Onda primordiale, silenziosa e inarrestabile. Scorre nei fiumi e inghiotte i nemici.",
+            tactics: "Affoga i bersagli con Massetello e Crogiolo. Si muove sott'acqua rapidamente.",
+            attacks: "💧 Massetello: +7 (2d8+5 contundenti + afferra). Crogiolo: trascina e trattiene."
+        },
+        "Elementale della Terra": {
+            lore: "Montagna che cammina, scava e divora. Incarna la pazienza delle rocce.",
+            tactics: "Inghiottire i nemici nel terreno. Alta CA e PF. Scava sotto gli avversari.",
+            attacks: "⛰️ Schianto: +8 (2d8+5 contundenti). Terra che inghiotte: intrappola e soffoca."
+        },
+        "Elementale dell'Aria": {
+            lore: "Tempesta viva, vortice di vento. Libero come la brezza delle cime.",
+            tactics: "Turbo e risucchio, può spostare nemici. Volo hover, ignora terreni difficili.",
+            attacks: "🌬️ Turbina: +8 (2d8+5). Turbine: risucchia creature piccole/medie."
+        },
+        "Drago Elementale Minore": {
+            lore: "Raro incrocio tra drago e spirito elementale, custode dei quattro elementi. Fjellbjørn ha stretto un patto con lui in una cresta di fuoco e ghiaccio.",
+            tactics: "Soffio elementale a scelta (fuoco, freddo, fulmine, acido). Attacchi fisici e magici. Versatile.",
+            attacks: "🐉 Morso: +7 (1d10+4 perforanti). Soffio (ricarica 5-6): cono 20ft, 4d6 elementali (CD14 Des dimezza)."
+        }
+    };
+
+    // Elenco bestie da visualizzare (ordine come nel bestiario originale)
+    const beastsList = [
+        "Orso Bruno", "Lupo", "Aquila Gigante", "Cinghiale Gigante", "Lupo Invernale",
+        "Tigre dei Ghiacci", "Anfisbaena", "Scorpione Gigante", "Ankylosauro",
+        "Elementale del Fuoco", "Elementale dell'Acqua", "Elementale della Terra",
+        "Elementale dell'Aria", "Drago Elementale Minore"
+    ];
+
+    // Popola griglia bestiario
+    const beastGrid = document.getElementById('beastGrid');
+    beastsList.forEach(beastName => {
+        const details = beastDetails[beastName];
+        if (!details) return;
+        // Estrai dal nome un'emoji grezza per simpatia
+        let emoji = "🐾";
+        if (beastName.includes("Orso")) emoji = "🐻";
+        if (beastName.includes("Lupo")) emoji = "🐺";
+        if (beastName.includes("Aquila")) emoji = "🦅";
+        if (beastName.includes("Cinghiale")) emoji = "🐗";
+        if (beastName.includes("Tigre")) emoji = "❄️";
+        if (beastName.includes("Anfisbaena")) emoji = "🐍";
+        if (beastName.includes("Scorpione")) emoji = "🦂";
+        if (beastName.includes("Ankylosauro")) emoji = "🦕";
+        if (beastName.includes("Elementale del Fuoco")) emoji = "🔥";
+        if (beastName.includes("Acqua")) emoji = "💧";
+        if (beastName.includes("Terra")) emoji = "⛰️";
+        if (beastName.includes("Aria")) emoji = "🌬️";
+        if (beastName.includes("Drago")) emoji = "🐉";
+        
+        const card = document.createElement('div');
+        card.className = 'beast-card';
+        card.setAttribute('data-beast', beastName);
+        card.innerHTML = `
+            <div class="beast-name">${emoji} ${beastName} <span>CR ${beastName.includes("Elementale") ? "5" : (beastName.includes("Drago")?"4":(beastName==="Lupo Invernale"?"3":(beastName==="Orso Bruno"?"1":(beastName==="Cinghiale Gigante"?"2":(beastName==="Tigre dei Ghiacci"?"2":(beastName==="Anfisbaena"?"2":(beastName==="Scorpione Gigante"?"3":(beastName==="Ankylosauro"?"3":"1"))))))))}</span></div>
+            <div class="beast-stats"><span>CA ${getCA(beastName)}</span><span>PF ${getPF(beastName)}</span><span>Vel ${getVel(beastName)}</span></div>
+            <div>Clicca per scheda completa</div>
+        `;
+        card.addEventListener('click', () => openModal(beastName));
+        beastGrid.appendChild(card);
+    });
+
+    function getCA(beast) {
+        const caMap = {"Orso Bruno":11,"Lupo":13,"Aquila Gigante":13,"Cinghiale Gigante":12,"Lupo Invernale":13,"Tigre dei Ghiacci":13,"Anfisbaena":14,"Scorpione Gigante":15,"Ankylosauro":15,"Elementale del Fuoco":13,"Elementale dell'Acqua":14,"Elementale della Terra":17,"Elementale dell'Aria":15,"Drago Elementale Minore":16};
+        return caMap[beast] || "13";
+    }
+    function getPF(beast) {
+        const pfMap = {"Orso Bruno":34,"Lupo":11,"Aquila Gigante":26,"Cinghiale Gigante":42,"Lupo Invernale":75,"Tigre dei Ghiacci":45,"Anfisbaena":39,"Scorpione Gigante":52,"Ankylosauro":68,"Elementale del Fuoco":102,"Elementale dell'Acqua":114,"Elementale della Terra":126,"Elementale dell'Aria":90,"Drago Elementale Minore":75};
+        return pfMap[beast] || "50";
+    }
+    function getVel(beast) {
+        const velMap = {"Orso Bruno":"40ft","Lupo":"40ft","Aquila Gigante":"volo 80ft","Cinghiale Gigante":"40ft","Lupo Invernale":"50ft","Tigre dei Ghiacci":"50ft","Anfisbaena":"30ft, volo30ft","Scorpione Gigante":"40ft","Ankylosauro":"30ft","Elementale del Fuoco":"50ft","Elementale dell'Acqua":"30ft, nuoto90ft","Elementale della Terra":"30ft, scavare30ft","Elementale dell'Aria":"volo90ft","Drago Elementale Minore":"30ft, volo60ft"};
+        return velMap[beast] || "30ft";
+    }
+
+    // Modale
+    const modal = document.getElementById('beastModal');
+    const modalTitle = document.getElementById('modalBeastName');
+    const modalBody = document.getElementById('modalBody');
+    const closeBtn = document.getElementById('closeModalBtn');
+
+    function openModal(beastName) {
+        const data = beastDetails[beastName];
+        if (!data) return;
+        modalTitle.innerText = `${beastName}`;
+        modalBody.innerHTML = `
+            <h3>📖 Lore & Natura</h3>
+            <p>${data.lore}</p>
+            <h3>⚔️ Tattiche di combattimento</h3>
+            <p>${data.tactics}</p>
+            <h3>🎲 Danni e attacchi dettagliati</h3>
+            <div class="damage-detail">${data.attacks}</div>
+            <button class="close-modal close-modal-btn" style="background:#b4782e;">Chiudi scheda</button>
+        `;
+        modal.style.display = 'flex';
+        // attach event to new close button
+        const newClose = modalBody.querySelector('.close-modal-btn');
+        if (newClose) newClose.addEventListener('click', () => modal.style.display = 'none');
+    }
+    closeBtn.addEventListener('click', () => modal.style.display = 'none');
+    modal.addEventListener('click', (e) => { if (e.target === modal) modal.style.display = 'none'; });
+
+    // ---- resto funzionalità esistenti (HP, slot, inventario, wild shape) ----
     const hpDisplay = document.getElementById('currentHpDisplay');
     const hpInput = document.getElementById('hpInput');
     const hpAdd = document.getElementById('hpAdd');
     const hpSub = document.getElementById('hpSub');
-    function updateHp(value) {
-        let newHp = Math.max(0, parseInt(value) || 0);
-        hpDisplay.innerText = newHp;
-        hpInput.value = newHp;
-    }
-    hpAdd.addEventListener('click', () => updateHp(parseInt(hpInput.value) + 1));
-    hpSub.addEventListener('click', () => updateHp(parseInt(hpInput.value) - 1));
+    function updateHp(val) { let nh = Math.max(0, parseInt(val)||0); hpDisplay.innerText = nh; hpInput.value = nh; }
+    hpAdd.addEventListener('click', () => updateHp(parseInt(hpInput.value)+1));
+    hpSub.addEventListener('click', () => updateHp(parseInt(hpInput.value)-1));
     hpInput.addEventListener('change', () => updateHp(hpInput.value));
 
-    // --- GENERAZIONE TRACKER SLOT INCANTESIMI ---
-    const slotConfig = {1:4, 2:3, 3:3, 4:3, 5:2};
-    const containers = {
-        1: document.getElementById('slots1'),
-        2: document.getElementById('slots2'),
-        3: document.getElementById('slots3'),
-        4: document.getElementById('slots4'),
-        5: document.getElementById('slots5')
-    };
+    const slotConfig = {1:4,2:3,3:3,4:3,5:2};
+    const containers = {1:document.getElementById('slots1'),2:document.getElementById('slots2'),3:document.getElementById('slots3'),4:document.getElementById('slots4'),5:document.getElementById('slots5')};
     function createSlotTrackers() {
-        for (let lvl=1; lvl<=5; lvl++) {
-            const container = containers[lvl];
-            if (!container) continue;
-            container.innerHTML = '';
-            for (let i=0; i<slotConfig[lvl]; i++) {
-                const div = document.createElement('div');
-                div.className = 'slot-check';
-                const cb = document.createElement('input');
-                cb.type = 'checkbox';
-                cb.id = `slot_${lvl}_${i}`;
-                const label = document.createElement('label');
-                label.htmlFor = cb.id;
-                label.innerText = '⬚';
-                div.appendChild(cb);
-                div.appendChild(label);
-                container.appendChild(div);
+        for(let lvl=1;lvl<=5;lvl++) {
+            const cont = containers[lvl];
+            if(!cont) continue;
+            cont.innerHTML = '';
+            for(let i=0;i<slotConfig[lvl];i++) {
+                const div = document.createElement('div'); div.className='slot-check';
+                const cb = document.createElement('input'); cb.type='checkbox'; cb.id=`slot_${lvl}_${i}`;
+                const label = document.createElement('label'); label.htmlFor=cb.id; label.innerText='⬚';
+                div.appendChild(cb); div.appendChild(label); cont.appendChild(div);
             }
         }
     }
     createSlotTrackers();
-    document.getElementById('resetSpells').addEventListener('click', () => {
-        for (let lvl=1; lvl<=5; lvl++) {
-            const container = containers[lvl];
-            if (!container) continue;
-            const checkboxes = container.querySelectorAll('input[type="checkbox"]');
-            checkboxes.forEach(cb => cb.checked = false);
-        }
-    });
+    document.getElementById('resetSpells')?.addEventListener('click',()=>{for(let lvl=1;lvl<=5;lvl++){const cont=containers[lvl]; if(cont) cont.querySelectorAll('input').forEach(cb=>cb.checked=false);}});
 
-    // --- WILD SHAPE TRACKER (2 usi base) ---
-    const wildShapeContainer = document.getElementById('wildShapeTracker');
-    let wildShapeUses = [false, false]; // false = non usato
+    let wildUses = [false, false];
+    const wsContainer = document.getElementById('wildShapeTracker');
     function renderWildShape() {
-        wildShapeContainer.innerHTML = '';
-        for (let i=0; i<2; i++) {
-            const div = document.createElement('div');
-            div.className = 'slot-check';
-            const cb = document.createElement('input');
-            cb.type = 'checkbox';
-            cb.id = `wild_${i}`;
-            cb.checked = wildShapeUses[i];
-            cb.addEventListener('change', (e) => {
-                wildShapeUses[i] = e.target.checked;
-            });
-            const label = document.createElement('label');
-            label.htmlFor = cb.id;
-            label.innerText = `Utilizzo ${i+1}`;
-            div.appendChild(cb);
-            div.appendChild(label);
-            wildShapeContainer.appendChild(div);
+        wsContainer.innerHTML = '';
+        for(let i=0;i<2;i++) {
+            const div = document.createElement('div'); div.className='slot-check';
+            const cb = document.createElement('input'); cb.type='checkbox'; cb.id=`wild_${i}`; cb.checked=wildUses[i];
+            cb.addEventListener('change',(e)=>{wildUses[i]=e.target.checked;});
+            const label = document.createElement('label'); label.htmlFor=cb.id; label.innerText=`Uso ${i+1}`;
+            div.appendChild(cb); div.appendChild(label); wsContainer.appendChild(div);
         }
-        const noteSpan = document.createElement('div');
-        noteSpan.style.fontSize='0.7rem';
-        noteSpan.style.marginTop='0.2rem';
-        noteSpan.innerText = `✓ Forma normale (1 uso) | Elementale/Drago minore: 2 usi`;
-        wildShapeContainer.appendChild(noteSpan);
+        const info = document.createElement('div'); info.style.fontSize='0.7rem'; info.style.marginTop='0.3rem'; info.innerText='☑️ spunta quando usi una trasformazione. Elementale = 2 usi.';
+        wsContainer.appendChild(info);
     }
     renderWildShape();
-    document.getElementById('resetWildShape').addEventListener('click', () => {
-        wildShapeUses = [false, false];
-        renderWildShape();
-    });
+    document.getElementById('resetWildShape')?.addEventListener('click',()=>{ wildUses = [false, false]; renderWildShape(); });
 
-    // --- INVENTARIO DINAMICO (oggetti) ---
     const inventoryDiv = document.getElementById('inventoryList');
     const newItemInput = document.getElementById('newItemName');
     const addBtn = document.getElementById('addItemBtn');
-
-    function removeItem(btn) {
-        const itemDiv = btn.closest('.inventory-item');
-        if (itemDiv) itemDiv.remove();
-    }
-    function addInventoryItem(name) {
-        if (!name.trim()) return;
-        const newDiv = document.createElement('div');
-        newDiv.className = 'inventory-item';
-        newDiv.innerHTML = `${name} <button class="remove-item-btn reset-btn" style="background:#8b5a2b;">🗑️</button>`;
-        const rmBtn = newDiv.querySelector('.remove-item-btn');
-        rmBtn.addEventListener('click', () => removeItem(rmBtn));
-        inventoryDiv.appendChild(newDiv);
-    }
-    document.querySelectorAll('.remove-item-btn').forEach(btn => {
-        btn.addEventListener('click', () => removeItem(btn));
-    });
-    addBtn.addEventListener('click', () => {
-        const itemName = newItemInput.value.trim();
-        if (itemName) {
-            addInventoryItem(itemName);
-            newItemInput.value = '';
-        }
-    });
-
-    // Monete già gestite con input numerici diretti, non serve ulteriore logica.
+    function removeItem(btn) { const item = btn.closest('.inventory-item'); if(item) item.remove(); }
+    function addInventoryItem(name) { if(!name.trim()) return; const div = document.createElement('div'); div.className='inventory-item'; div.innerHTML = `${name.trim()} <button class="remove-item-btn reset-btn">🗑️</button>`; const rm = div.querySelector('.remove-item-btn'); rm.addEventListener('click',()=>removeItem(rm)); inventoryDiv.appendChild(div); }
+    document.querySelectorAll('.remove-item-btn').forEach(btn=>btn.addEventListener('click',()=>removeItem(btn)));
+    addBtn.addEventListener('click',()=>{ if(newItemInput.value.trim()){ addInventoryItem(newItemInput.value); newItemInput.value=''; } });
 </script>
 </body>
 </html>
